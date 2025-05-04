@@ -12,7 +12,18 @@ module Multiplier #(
     output reg [2*N-1:0] product
 );
 
-
-// Insira seu código aqui
+always @(posedge clk) begin
+        if (!rst_n) begin
+            ready   <= 1'b0;
+            product <= {2*N{1'b0}};
+        end else begin
+            if (start) begin
+                product <= multiplier * multiplicand;  
+                ready   <= 1'b1;
+            end else begin
+                ready <= 1'b0;
+            end
+        end
+    end
 
 endmodule
